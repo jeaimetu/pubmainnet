@@ -66,7 +66,7 @@ config = {
 
 eos = Eos(config);
 
-const contractOwner = "publytokenio";
+const contractOwner = "publytoken11";
 
 async function getInternalBalance(account){
 	
