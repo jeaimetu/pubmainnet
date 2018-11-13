@@ -167,7 +167,7 @@ exports.newAccount = function(userid, callback){
 		"result" : "200"
 	};
 	eos.transaction(contractOwner, myaccount => {
-		const options = { authorization: [ `eoscafekorea@active` ] };
+		const options = { authorization: [ `publytoken11@active` ] };
 		myaccount.newaccount(userid, options);
 	}).then((output) => {
 		console.log("success");		
@@ -185,7 +185,7 @@ exports.refund = function(from, to, callback){
 	};
 	  
 	eos.transaction(contractOwner, myaccount => {
-		const options = { authorization: [ `eoscafekorea@active` ] };
+		const options = { authorization: [ `publytoken11@active` ] };
 		myaccount.refund(from, to, options);
 	}).then((output) => {
 		console.log("success");
@@ -202,7 +202,7 @@ exports.update = function(user, amount, callback){
 		"result" : "200"
 	};
 	eos.transaction(contractOwner, myaccount => {
-		const options = { authorization: [ `eoscafekorea@active` ] };
+		const options = { authorization: [ `publytoken11@active` ] };
 		myaccount.update(user, amount, options);
 	}).then((output) => {
 		console.log("success");
@@ -219,7 +219,7 @@ exports.linkAccount = function(username, eosAccount, callback){
 		"result" : "200"
 	};
 	eos.transaction(contractOwner, myaccount => {
-		const options = { authorization: [ `eoscafekorea@active` ] };
+		const options = { authorization: [ `publytoken11@active` ] };
 		myaccount.check(eosAccount, username, "link internal account to external account", options);
 	}).then((output) => {
 		console.log("success");
@@ -236,7 +236,7 @@ exports.thanks = function(username, contentId, ink, callback){
 		"result" : "200"
 	};
 	eos.transaction(contractOwner, myaccount => {
-		const options = { authorization: [ `eoscafekorea@active` ] };
+		const options = { authorization: [ `publytoken11@active` ] };
 		myaccount.thanks(username, ink, contentId, options);
 	}).then((output) => {
 		console.log("success");
@@ -251,7 +251,7 @@ exports.thanks = function(username, contentId, ink, callback){
 function sendEos(i){
 	console.log(testers[i]);
 	eos.transaction(contractOwner, myaccount => {
-		const options = { authorization: [ `eoscafekorea@active` ] };
+		const options = { authorization: [ `publytoken11@active` ] };
 		myaccount.pubtransfer("publytoman", 1, testers[i][1], 1, testers[i][2], "PUB CBT", options);
 	}).then((output) => {
 		console.log("success");
@@ -283,7 +283,7 @@ exports.stake = function(from, to, quantity, callback){
 	};
 	
 	eos.transaction(contractOwner, myaccount => {
-		const options = { authorization: [ `eoscafekorea@active` ] };
+		const options = { authorization: [ `publytoken11@active` ] };
 		myaccount.stake(from, 1, to, isInternalTo, quantity, options);
 	}).then((output) => {
 		console.log("success");
@@ -307,7 +307,7 @@ exports.unStake = function(from, to, quantity, callback){
 		"result" : "200"
 	};
 	eos.transaction(contractOwner, myaccount => {
-		const options = { authorization: [ `eoscafekorea@active` ] };
+		const options = { authorization: [ `publytoken11@active` ] };
 		myaccount.unstake(from, 1, to, isInternalTo, quantity, options);
 	}).then((output) => {
 		console.log("success");
@@ -338,7 +338,7 @@ exports.pubTransfer = function(from, to, quantity, memo, callback){
 		"result" : "200"
 	};
 	eos.transaction(contractOwner, myaccount => {
-		const options = { authorization: [ `eoscafekorea@active` ] };
+		const options = { authorization: [ `publytoken11@active` ] };
 		myaccount.pubtransfer(from, isInternalFrom, to, isInternalTo, quantity, memo, options);
 	}).then((output) => {
 		console.log("success");
