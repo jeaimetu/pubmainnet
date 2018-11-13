@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
 	console.log("authentication check");
-	if(req.headers.apikey == "1234"){
+	if(req.headers.apikey == "75fca9a7-fe35-40e3-892b-657b624b8813"){
 		console.log("auth success");
 		return next();
 	}else{
