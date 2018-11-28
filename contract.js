@@ -127,7 +127,7 @@ async function getInternalBalance(account){
 			body.staked += parseFloat(res[0]);
 		}
 	}else{
-		console.log("there is no stake table for this account", account);
+		console.log("there is no stakesum table for this account", account);
 	}
 	
 	
@@ -145,7 +145,7 @@ async function getInternalBalance(account){
 		}
 		body.unstaketbl = bal;
 	}else{
-		console.log("there is no unstake table for this account", account);
+		console.log("there is no unstaketbl table for this account", account);
 	}
 	
 	return body;
