@@ -103,13 +103,33 @@ async function getInternalBalance(account){
 	
 	if(bal.rows.length != 0){
 		for(i = 0;i<bal.rows.length;i++){
-			let res = bal.rows[i].balance.split("PUB");
-			body.staked += parseFloat(res[0]);
+			if(bal.rows[i].user == account){
+				let res = bal.rows[i].balance.split("PUB");
+				body.staked += parseFloat(res[0]);
+			}
 		}
 		body.staketbl = bal;
 	}else{
 		console.log("there is no stake table for this account", account);
 	}
+	
+	//adding stakesum table for checking sum which are staked by others
+	bal = await eos.getTableRows({json : true,
+                 code : contractOwner,
+                 scope: account,
+                 table: "stakesum",
+                 }).catch((err) => {
+  			return null});
+	
+	if(bal.rows.length != 0){
+		for(i = 0;i<bal.rows.length;i++){
+			let res = bal.rows[i].balance.split("PUB");
+			body.staked += parseFloat(res[0]);
+		}
+	}else{
+		console.log("there is no stake table for this account", account);
+	}
+	
 	
 	bal = await eos.getTableRows({json : true,
                  code : contractOwner,
