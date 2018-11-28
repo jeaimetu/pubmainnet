@@ -73,6 +73,7 @@ async function getInternalBalance(account){
 	var body = {
 		"balance" : 0,
 		"staked" : 0,
+		"staked2" : 0,
 		"unstaked" : 0,
 		"refund" : 0,
 		"ink" : 0,
@@ -100,15 +101,23 @@ async function getInternalBalance(account){
                  table: "staketbl3",
                  }).catch((err) => {
   			return null});
+	if(bal.rows.length != 0){
+		for(i = 0;i<bal.rows.length;i++){
+			let res = bal.rows[i].balance.split("PUB");
+			body.staked += parseFloat(res[0]);			
+		}
+		body.staketbl = bal;
+	}else{
+		console.log("there is no stake table for this account", account);
+	}
 	
 	if(bal.rows.length != 0){
 		for(i = 0;i<bal.rows.length;i++){
 			if(bal.rows[i].user == account){
 				let res = bal.rows[i].balance.split("PUB");
-				body.staked += parseFloat(res[0]);
+				body.staked2 += parseFloat(res[0]);
 			}
 		}
-		body.staketbl = bal;
 	}else{
 		console.log("there is no stake table for this account", account);
 	}
@@ -124,7 +133,7 @@ async function getInternalBalance(account){
 	if(bal.rows.length != 0){
 		for(i = 0;i<bal.rows.length;i++){
 			let res = bal.rows[i].balance.split("PUB");
-			body.staked += parseFloat(res[0]);
+			body.staked2 += parseFloat(res[0]);
 		}
 	}else{
 		console.log("there is no stakesum table for this account", account);
@@ -176,6 +185,7 @@ exports.getAsset = async function(iuser, euser, callback){
 	//adding unit "PUB"
 	internalBalance.balance = internalBalance.balance.toFixed(4) + " PUB";
 	internalBalance.staked = internalBalance.staked.toFixed(4) + " PUB";
+	internalBalance.staked2 = internalBalance.staked2.toFixed(4) + " PUB";
 	internalBalance.unstaked = internalBalance.unstaked.toFixed(4) + " PUB";
 	internalBalance.refund = internalBalance.refund.toFixed(4) + " PUB";
 	callback(internalBalance);
