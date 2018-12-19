@@ -70,8 +70,8 @@ const contractOwner = "publytoken11";
 
 exports.linkStatus  = async function(username, callback){
 	var body = {
-		"status" : 0,
-		"eosaccount" : 0,
+		"status" : "0",
+		"eosaccount" : "0",
 		"result" : "200"
 	};
 	
@@ -82,6 +82,7 @@ exports.linkStatus  = async function(username, callback){
 		 table : "contbl2",
 		 }).catch((err) => {
 		   	return null});
+	console.log("link status", bal);
 	
 	if(bal.rows.length != 0){
 		body.status = bal.rows[0].status;
