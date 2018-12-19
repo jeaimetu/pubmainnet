@@ -68,6 +68,31 @@ eos = Eos(config);
 
 const contractOwner = "publytoken11";
 
+exports.linkStatus  = async function(username, callback){
+	var body = {
+		"status" : 0,
+		"eosaccount" : 0,
+		"result" : "200"
+	};
+	
+	let bal = await eos.getTableRows(
+		{json : true,
+		 code : contractOwner,
+		 scope : username,
+		 table : "contbl2",
+		 }).catch((err) => {
+		   	return null});
+	
+	if(bal.rows.length != 0){
+		body.status = bal.rows[0].status;
+		body.eosaccount = bal.rows[0].user;
+	}else{
+		body.status = "0";
+	}
+	
+	callback(body);
+}
+
 async function getInternalBalance(account){
 	
 	var body = {
