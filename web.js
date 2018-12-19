@@ -36,6 +36,22 @@ app.post("/v1/users/link-to-eos-account", function(req, res) {
 	
 });
 
+
+app.post("/v1/users/get-link-status", function(req, res) { 
+
+	  var username = req.body.username;
+
+	  console.log("get-link-status event", username);
+	  ///calling smart contract
+	  contract.linkStatus (username, (result) => {
+		var body = {
+			"result" : result
+		};
+		res.send(body);
+	});
+	
+});
+
 app.post("/v1/users/distribute", function(req, res) { 
 
 
