@@ -32,8 +32,19 @@ app.post("/v1/users/link-to-eos-account", function(req, res) {
 			"result" : result
 		};
 		res.send(body);
-	});
-	
+	});	
+});
+
+app.post("/v1/users/delete-eos-account", function(req, res) { 
+	var eosAccount = req.body.eosAccount;
+	console.log("delete-eos-account event", eosAccount);
+	///calling smart contract
+	contract.delAccount (eosAccount, (result) => {
+		var body = {
+			"result" : result
+		};
+		res.send(body);
+	});	
 });
 
 
