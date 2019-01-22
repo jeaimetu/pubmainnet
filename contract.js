@@ -118,6 +118,7 @@ async function getInternalBalance(account){
 	bal = await eos.getTableRows({json : true,
                  code : contractOwner,
                  scope: account,
+		 limit : -1,
                  table: "unstaketbl",
                  }).catch((err) => {
   			return null});
