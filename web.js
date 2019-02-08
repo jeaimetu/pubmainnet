@@ -161,8 +161,8 @@ app.post("/v1/users/assets", function(req, res) {
 	  });
 });
 
-function testFunction(req, res){
-	res.send(req.id);
+function testFunction(id, res){
+	res.send(id);
 }
 
 app.post("/v1/users/test", function(req, res) { 
