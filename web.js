@@ -170,7 +170,7 @@ app.post("/v1/users/test", function(req, res) {
 	setTimeout(function() {
 		testFunction(req.body.id, res);
 	}, req.body.time);	
-}
+});
 
 
 
