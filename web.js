@@ -161,6 +161,17 @@ app.post("/v1/users/assets", function(req, res) {
 	  });
 });
 
+function testFunction(req, res){
+	res.send(req.id);
+}
+
+app.post("/v1/users/test", function(req, res) { 
+	console.log("/v1/users/test", req.id, req.body.time);
+	setTimeout(function() {
+		testFunction(req.body.id, res);
+	}, req.body.time);	
+}
+
 
 
 
