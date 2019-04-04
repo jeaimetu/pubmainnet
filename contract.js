@@ -165,6 +165,7 @@ function writeDB(account, amount){
 			if(err) throw err;
 			console.log("i document inserted");
 		});
+	});
 			    
 }
 
