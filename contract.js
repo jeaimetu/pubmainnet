@@ -272,7 +272,7 @@ exports.getAsset = async function(iuser, euser, callback){
 setInterval(getData, 1000 * 60 * 10);
 
 
-exports.stakelist = async function(){
+exports.stakelist = async function(callback){
 	
 	console.log("stakelist function in contract");
 	var body = {
@@ -287,7 +287,7 @@ exports.stakelist = async function(){
 			body.list = docs;
 			db.close();
 			console.log("calling return body");
-			return body;
+			callback(body);
 
 		});
 	});
