@@ -96,6 +96,7 @@ app.get("/", function(req, res) {
 	  
 	  console.log("/v1/users/stakelist");
 	contract.stakelist((result) => {
+		console.log("callindg res render");
 		res.render("./main/main",{
 			   data : result});
 	});
