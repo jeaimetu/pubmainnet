@@ -198,7 +198,7 @@ exports.getAsset = async function(iuser, euser, callback){
                  table: "stakesum",
                  }).catch((err) => {
   			return null});
-	if(bal.rows.length != 0 && item != undefined){
+	if(bal.rows.length != 0 && item !== "undefined"){
 		let res = item.balance.split("PUB");
 		sum1 = res[0];
 	}else{
