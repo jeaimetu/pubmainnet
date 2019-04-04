@@ -274,6 +274,7 @@ setInterval(getData, 1000 * 60 * 10);
 
 exports.stakelist = async function(){
 	
+	console.log("stakelist function in contract");
 	var body = {
 		"result" : "200",
 		"list" : []
@@ -284,8 +285,10 @@ exports.stakelist = async function(){
 		dbo.collection("board").find().sort( { amount : -1}).toArray(function(err, docs) {
 			if(err) throw err;
 			body.list = docs;
-			return body;
 			db.close();
+			console.log("calling return body");
+			return body;
+
 		});
 	});
 }
