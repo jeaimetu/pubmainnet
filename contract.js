@@ -284,7 +284,7 @@ exports.stakelist = async function(callback){
 		dbo.collection("board").find().sort( { amount : -1}).toArray(function(err, docs) {
 			if(err) throw err;
 			body.list = docs;
-			callback(body);
+			return body;
 			db.close();
 		});
 	});
