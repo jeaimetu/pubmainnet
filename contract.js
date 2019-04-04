@@ -216,7 +216,7 @@ exports.getAsset = async function(iuser, euser, callback){
 	if(bal2.rows.length != 0){
 		for(const item2 of bal2.rows){
 			if(item2.user == account){
-				let res =item2.split("PUB");
+				let res =item2.balance.split("PUB");
 				sum2 += parseFloat(res[0]);
 			}
 		}
