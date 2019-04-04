@@ -95,7 +95,7 @@ app.post("/v1/users/stakelist", function(req, res) {
 	  var ink = req.body.ink
 	  console.log("/v1/users/stakelist");
 	contract.stakelist((result) => {
-		res.render("./main/main,{
+		res.render("./main/main",{
 			   data : result});
 	});
 	  
