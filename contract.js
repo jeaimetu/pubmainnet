@@ -151,6 +151,23 @@ async function getExternalBalance(account){
 		return 0;
 }
 
+//mongo DB
+var mongo = require('mongodb');
+var MongoClient = require('mongodb').MongoClient;
+var url = process.env.MONGODB_URI;
+
+writeDB(account, amount){
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dx6phtwp");
+		let myobj = { $set : { account : account, amount : amount}};
+		let findquery = {account : account};
+		dbo.collection("board").updateOne(findquery, myobj, function(err, res){
+			if(err) throw err;
+			console.log("i document inserted");
+		});
+			    
+}
+
 exports.getAsset = async function(iuser, euser, callback){
 	console.log("getAsset", iuser, euser);
 	let [internalBalance, externalBalance] = 
@@ -222,10 +239,14 @@ exports.getAsset = async function(iuser, euser, callback){
 		}
 		console.log("pushing object", account, parseFloat(sum1)+parseFloat(sum2));
 		body.list.push({ account : account, stake : parseFloat(sum1)+parseFloat(sum2)});
+		//DB Writing
+		writeDB(account, parseFloat(sum1)+parseFloat(sum2));
 	}else{
 		sum2 = 0;
 		console.log("pushing object", account, parseFloat(sum1)+parseFloat(sum2));
 		body.list.push({ account : account, stake : parseFloat(sum1)+parseFloat(sum2)});
+		//DB writing
+		writeDB(account, parseFloat(sum1)+parseFloat(sum2));
 	}
 
 
