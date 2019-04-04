@@ -185,6 +185,7 @@ exports.getAsset = async function(iuser, euser, callback){
   			return null});
 	
 
+		console.log("stakelist total rows", bal.rows.length);
 	for(i = 0;i < bal.rows.length;i++){
 	let sum1 = 0;
 	let sum2 = 0; 
@@ -222,6 +223,7 @@ exports.getAsset = async function(iuser, euser, callback){
 	}else{
 		sum2 = 0;
 	}
+		console.log("pushing object", account, sum1+sum2);
 		body.list.push({ account : account, stake : sum1+sum2});
 
 	}//end for
