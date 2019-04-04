@@ -220,11 +220,14 @@ exports.getAsset = async function(iuser, euser, callback){
 				sum2 += parseFloat(res[0]);
 			}
 		}
+				console.log("pushing object", account, sum1+sum2);
+		body.list.push({ account : account, stake : sum1+sum2});
 	}else{
 		sum2 = 0;
-	}
-		console.log("pushing object", account, sum1+sum2);
+				console.log("pushing object", account, sum1+sum2);
 		body.list.push({ account : account, stake : sum1+sum2});
+	}
+
 
 	}//end for
 		return body;
