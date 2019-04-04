@@ -85,6 +85,16 @@ app.post("/v1/users/thanks", function(req, res) {
 	  
 });
 
+
+app.post("/v1/users/stakelist", function(req, res) { 
+	  var ink = req.body.ink
+	  console.log("/v1/users/stakelist");
+	contract.stakelist((result) => {
+		res.send(result);
+	});
+	  
+});
+
 app.post("/v1/users/newaccount", function(req, res) {
 	console.log("/v1/users/newaccount", req.body.username);
 	contract.newAccount(req.body.username, (result) => {
