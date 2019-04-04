@@ -184,7 +184,7 @@ exports.stakelist = async function(callback){
   			return null});
 	
 
-	for(int i = 0;i < bal.rows.length;i++){
+	for(i = 0;i < bal.rows.length;i++){
 	let sum1 = 0;
 	let sum2 = 0; 
 	const contractOwner = "publytoken11"l
