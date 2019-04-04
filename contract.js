@@ -183,14 +183,49 @@ exports.stakelist = async function(callback){
                  }).catch((err) => {
   			return null});
 	
+
+	for(int i = 0;i < bal.rows.length;i++){
+	let sum1 = 0;
+	let sum2 = 0; 
+	const contractOwner = "publytoken11"l
+	const account = bal.rows[i].iuser;
+	//retrieve stake sum
+	bal = await eos.getTableRows({json : true,
+                 code : contractOwner,
+                 scope: account,
+                 table: "stakesum",
+                 }).catch((err) => {
+  			return null});
 	if(bal.rows.length != 0){
-		body.list = bal;
-		callback(bal);
+		let res = bal.rows[i].balance.split("PUB");
+		sum1 = res[0];
+	}else{
+		sum1 = 0;
 	}
-	else{
-		result = "404";
-		callback(body);
+	//retrieve stake tbl and fine himself
+	bal = await eos.getTableRows({json : true,
+                 code : contractOwner,
+                 scope: account,
+		 limit : -1,
+                 table: "staketbl3",
+                 }).catch((err) => {
+  			return null});
+	
+	if(bal.rows.length != 0){
+		for(i = 0;i<bal.rows.length;i++){
+			if(bal.rows[i].user == account){
+				let res = bal.rows[i].balance.split("PUB");
+				sum2 += parseFloat(res[0]);
+			}
+		}
+	}else{
+		sum2 = 0;
 	}
+		body.list.push("user" : account, "stake" : sum1+sum2);
+
+	}//end for
+	
+	callback(body);
 	
 	
 }
