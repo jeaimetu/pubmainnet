@@ -164,9 +164,22 @@ function writeDB(account, amount){
 		dbo.collection("board").insertOne(myobj, function(err, res){
 			if(err) throw err;
 			console.log("i document inserted");
+			db.close();
 		});
-	});
-			    
+	});			    
+}
+
+function updateDB(account, amount){
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dx6phtwp");
+		let myobj = { account : account, amount : amount};
+		let findquery = {account : account};
+		dbo.collection("board").updateOne(findquery, myobj, function(err, res){
+			if(err) throw err;
+			console.log("i document inserted");
+			db.close();
+		});
+	});			    
 }
 
 exports.getAsset = async function(iuser, euser, callback){
@@ -241,13 +254,13 @@ exports.getAsset = async function(iuser, euser, callback){
 		console.log("pushing object", account, parseFloat(sum1)+parseFloat(sum2));
 		body.list.push({ account : account, stake : parseFloat(sum1)+parseFloat(sum2)});
 		//DB Writing
-		writeDB(account, parseFloat(sum1)+parseFloat(sum2));
+		updateDB(account, parseFloat(sum1)+parseFloat(sum2));
 	}else{
 		sum2 = 0;
 		console.log("pushing object", account, parseFloat(sum1)+parseFloat(sum2));
 		body.list.push({ account : account, stake : parseFloat(sum1)+parseFloat(sum2)});
 		//DB writing
-		writeDB(account, parseFloat(sum1)+parseFloat(sum2));
+		updateDB(account, parseFloat(sum1)+parseFloat(sum2));
 	}
 
 
@@ -256,10 +269,25 @@ exports.getAsset = async function(iuser, euser, callback){
 	}
 
 
+setInterval(stakelist, 1000 * 60 * 10);
+
+
 exports.stakelist = async function(callback){
 	
-	getData().then(data => callback(data));	
-	
+	var body = {
+		"result" : "200",
+		"list" : []
+	};
+	//getData().then(data => callback(data));	
+	MongoClient.connect(url, function(err, db) {
+		var dbo = db.db("heroku_dx6phtwp");
+		dbo.collection("board").find().toArray(function(err, docs) {
+			if(err) throw err;
+			body.list = docs;
+			callback(body);
+			db.close();
+		});
+	});
 }
 
 exports.newAccount = function(userid, callback){
