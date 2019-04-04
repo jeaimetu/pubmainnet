@@ -22,11 +22,7 @@
 </head>
 <body>
 
-<%
- function formatNumber(num) {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-}
-%>
+
 
 <h2>Publyto PUB Staking List</h2><BR><BR><BR>
 
@@ -42,7 +38,7 @@
     <% data.list.forEach(function(eachData, x){ %>
       <tr>
         <td><%= eachData.account %></td>
-        <td><%= formatNumber(eachData.amount.toFixed(4)) %></td>
+        <td><%= eachData.amount.toFixed(4).toLocaleString('en') %></td>
       </tr>
       <% }); %>
     </tbody>
