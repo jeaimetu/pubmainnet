@@ -187,7 +187,7 @@ exports.stakelist = async function(callback){
 	for(i = 0;i < bal.rows.length;i++){
 	let sum1 = 0;
 	let sum2 = 0; 
-	const contractOwner = "publytoken11"l
+	const contractOwner = "publytoken11";
 	const account = bal.rows[i].iuser;
 	//retrieve stake sum
 	bal = await eos.getTableRows({json : true,
