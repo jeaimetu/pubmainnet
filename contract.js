@@ -214,18 +214,18 @@ exports.getAsset = async function(iuser, euser, callback){
   			return null});
 	
 	if(bal2.rows.length != 0){
-		for(i = 0;i<bal2.rows.length;i++){
-			if(item.user == account){
-				let res = bal2[i].balance.split("PUB");
+		for(const item2 of bal2.rows){
+			if(item2.user == account){
+				let res =item2.split("PUB");
 				sum2 += parseFloat(res[0]);
 			}
 		}
-				console.log("pushing object", account, sum1+sum2);
-		body.list.push({ account : account, stake : sum1+sum2});
+		console.log("pushing object", account, parseFloat(sum1)+parseFloat(sum2));
+		body.list.push({ account : account, stake : parseFloat(sum1)+parseFloat(sum2)});
 	}else{
 		sum2 = 0;
-				console.log("pushing object", account, sum1+sum2);
-		body.list.push({ account : account, stake : sum1+sum2});
+		console.log("pushing object", account, parseFloat(sum1)+parseFloat(sum2));
+		body.list.push({ account : account, stake : parseFloat(sum1)+parseFloat(sum2)});
 	}
 
 
