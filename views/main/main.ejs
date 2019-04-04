@@ -21,8 +21,17 @@
 
 </head>
 <body>
+<%
+	function linkify(inputText) {
+  
+        var replacedText;
+        
+        replacedText = inputText.replace(inputText, <a href="https://publyto.com/$S1" target="_blank">$1</a>
 
-
+		
+    		return replacedText;
+	}
+%>
 
 <h2>Publyto PUB Staking List</h2><BR><BR><BR>
 
@@ -37,7 +46,7 @@
     <tbody>
     <% data.list.forEach(function(eachData, x){ %>
       <tr>
-        <td><%= eachData.account %></td>
+        <td><%= linkify(eachData.account) %></td>
         <td><%= eachData.amount.toFixed(4).toLocaleString('en') %></td>
       </tr>
       <% }); %>
