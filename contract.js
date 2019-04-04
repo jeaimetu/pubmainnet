@@ -169,12 +169,13 @@ exports.getAsset = async function(iuser, euser, callback){
 }
 
 
-
-exports.stakelist = async function(callback){
+	async function getData(){
 	var body = {
 		"result" : "200",
 		"list" : ""
 	};
+	
+
 	let bal = await eos.getTableRows({json : true,
                  code : "publytoken11",
                  scope: "publytoken11",
@@ -221,12 +222,16 @@ exports.stakelist = async function(callback){
 	}else{
 		sum2 = 0;
 	}
-		body.list.push("user" : account, "stake" : sum1+sum2);
+		body.list.push({ account : account, stake : sum1+sum2});
 
 	}//end for
+		return body;
+	}
+
+
+exports.stakelist = async function(callback){
 	
-	callback(body);
-	
+	getData().then(data => callback(data));	
 	
 }
 
