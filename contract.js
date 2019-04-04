@@ -186,11 +186,11 @@ exports.getAsset = async function(iuser, euser, callback){
 	
 
 		console.log("stakelist total rows", bal.rows.length);
-	for(i = 0;i < bal.rows.length;i++){
+	for(const item of bal.rows){
 	let sum1 = 0;
 	let sum2 = 0; 
 	const contractOwner = "publytoken11";
-	const account = bal.rows[i].iuser;
+	const account = item.iuser;
 	//retrieve stake sum
 	bal = await eos.getTableRows({json : true,
                  code : contractOwner,
@@ -199,7 +199,7 @@ exports.getAsset = async function(iuser, euser, callback){
                  }).catch((err) => {
   			return null});
 	if(bal.rows.length != 0){
-		let res = bal.rows[i].balance.split("PUB");
+		let res = item.balance.split("PUB");
 		sum1 = res[0];
 	}else{
 		sum1 = 0;
@@ -215,7 +215,7 @@ exports.getAsset = async function(iuser, euser, callback){
 	
 	if(bal.rows.length != 0){
 		for(i = 0;i<bal.rows.length;i++){
-			if(bal.rows[i].user == account){
+			if(item.user == account){
 				let res = bal.rows[i].balance.split("PUB");
 				sum2 += parseFloat(res[0]);
 			}
