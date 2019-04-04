@@ -272,7 +272,7 @@ exports.getAsset = async function(iuser, euser, callback){
 setInterval(getData, 1000 * 60 * 10);
 
 
-exports.stakelist = async function(callback){
+exports.stakelist = async function(){
 	
 	var body = {
 		"result" : "200",
