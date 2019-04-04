@@ -30,10 +30,12 @@
       </tr>
     </thead>
     <tbody>
+    <% data.forEach(function(eachData, x){ %>
       <tr>
-        <td>John</td>
-        <td>Doe</td>
+        <td><%= eachData.account %></td>
+        <td><%= eachData.amount %></td>
       </tr>
+      <% }); %>
     </tbody>
   </table>
 </div>
