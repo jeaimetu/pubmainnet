@@ -20,7 +20,7 @@
  
 </head>
 <body>
-<h2>Publyto PUB Staking List</h2>
+<h2>Publyto PUB Staking List</h2><BR><BR><BR>
 
 <div class="container">   
   <table class="table table-bordered">
@@ -34,7 +34,7 @@
     <% data.list.forEach(function(eachData, x){ %>
       <tr>
         <td><%= eachData.account %></td>
-        <td><%= new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(eachData.amount) %></td>
+        <td><%= eachData.amount.toFixed(4) %></td>
       </tr>
       <% }); %>
     </tbody>
