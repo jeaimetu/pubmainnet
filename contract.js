@@ -281,7 +281,7 @@ exports.stakelist = async function(callback){
 	//getData().then(data => callback(data));	
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dx6phtwp");
-		dbo.collection("board").find().toArray(function(err, docs) {
+		dbo.collection("board").find().sort( { amount : -1}).toArray(function(err, docs) {
 			if(err) throw err;
 			body.list = docs;
 			callback(body);
