@@ -168,6 +168,34 @@ exports.getAsset = async function(iuser, euser, callback){
 	callback(internalBalance);
 }
 
+
+stakelist
+
+exports.stakelist = async function(callback){
+	var body = {
+		"result" : "200",
+		"list" : ""
+	};
+	let bal = await eos.getTableRows({json : true,
+                 code : "publytoken11",
+                 scope: "publytoken11",
+		 limit : -1,
+                 table: "maptbl",
+                 }).catch((err) => {
+  			return null});
+	
+	if(bal.rows.length != 0){
+		body.list = bal;
+		callback(bal);
+	}
+	else{
+		result = "404";
+		callback(body);
+	}
+	
+	
+}
+
 exports.newAccount = function(userid, callback){
 	
 	var body = {
