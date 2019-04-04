@@ -172,7 +172,7 @@ exports.getAsset = async function(iuser, euser, callback){
 	async function getData(){
 	var body = {
 		"result" : "200",
-		"list" : {}
+		"list" : []
 	};
 	
 
