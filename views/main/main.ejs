@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-  <title>Dabble</title>
+  <title>Publyto Custom Plugin</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1", shrink-to-fit=no">
   
@@ -34,7 +34,7 @@
     <% data.list.forEach(function(eachData, x){ %>
       <tr>
         <td><%= eachData.account %></td>
-        <td><%= eachData.amount %></td>
+        <td><%= new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(eachData.amount) %></td>
       </tr>
       <% }); %>
     </tbody>
