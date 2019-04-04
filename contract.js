@@ -169,7 +169,6 @@ exports.getAsset = async function(iuser, euser, callback){
 }
 
 
-stakelist
 
 exports.stakelist = async function(callback){
 	var body = {
