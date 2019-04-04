@@ -5,6 +5,11 @@ var path = require('path');
 
 const contract = require("./contract");
 
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+app.set('views', __dirname + "/views");
+app.engine("html", require("ejs").renderFile);
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -90,7 +95,8 @@ app.post("/v1/users/stakelist", function(req, res) {
 	  var ink = req.body.ink
 	  console.log("/v1/users/stakelist");
 	contract.stakelist((result) => {
-		res.send(result);
+		res.render("./main/main,{
+			   data : result});
 	});
 	  
 });
