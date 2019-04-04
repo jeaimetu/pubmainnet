@@ -156,7 +156,7 @@ var mongo = require('mongodb');
 var MongoClient = require('mongodb').MongoClient;
 var url = process.env.MONGODB_URI;
 
-writeDB(account, amount){
+function writeDB(account, amount){
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dx6phtwp");
 		let myobj = { $set : { account : account, amount : amount}};
