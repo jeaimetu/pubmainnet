@@ -159,7 +159,7 @@ var url = process.env.MONGODB_URI;
 function writeDB(account, amount){
 	MongoClient.connect(url, function(err, db) {
 		var dbo = db.db("heroku_dx6phtwp");
-		let myobj = {{ account : account, amount : amount}};
+		let myobj = { account : account, amount : amount};
 		let findquery = {account : account};
 		dbo.collection("board").insertOne(myobj, function(err, res){
 			if(err) throw err;
