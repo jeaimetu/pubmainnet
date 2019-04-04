@@ -192,20 +192,20 @@ exports.getAsset = async function(iuser, euser, callback){
 	const contractOwner = "publytoken11";
 	const account = item.iuser;
 	//retrieve stake sum
-	bal = await eos.getTableRows({json : true,
+	bal1 = await eos.getTableRows({json : true,
                  code : contractOwner,
                  scope: account,
                  table: "stakesum",
                  }).catch((err) => {
   			return null});
-	if(bal.rows.length != 0 && item.hasOwnProperty("balance") == true){
-		let res = item.balance.split("PUB");
+	if(bal1.rows.length != 0){
+		let res = bal1.rows[0].balance.split("PUB");
 		sum1 = res[0];
 	}else{
 		sum1 = 0;
 	}
 	//retrieve stake tbl and fine himself
-	bal = await eos.getTableRows({json : true,
+	bal2 = await eos.getTableRows({json : true,
                  code : contractOwner,
                  scope: account,
 		 limit : -1,
@@ -213,10 +213,10 @@ exports.getAsset = async function(iuser, euser, callback){
                  }).catch((err) => {
   			return null});
 	
-	if(bal.rows.length != 0){
-		for(i = 0;i<bal.rows.length;i++){
+	if(bal2.rows.length != 0){
+		for(i = 0;i<bal2.rows.length;i++){
 			if(item.user == account){
-				let res = bal.rows[i].balance.split("PUB");
+				let res = bal2[i].balance.split("PUB");
 				sum2 += parseFloat(res[0]);
 			}
 		}
